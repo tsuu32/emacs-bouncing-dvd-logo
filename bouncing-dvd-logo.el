@@ -76,22 +76,26 @@ For exeample:
          (posframe-height (frame-pixel-height posframe))
          (parent-frame-width (frame-pixel-width parent-frame))
          (parent-frame-height (frame-pixel-height parent-frame)))
-    ;; error
+
+    ;; error when parent-frame is resized to too small
     (when (or (> posframe-width parent-frame-width)
               (> posframe-height parent-frame-height))
       (bouncing-dvd-logo-mode 0)
       (error "Child frame is too large"))
+
     ;; move
     (posframe--set-frame-position posframe
                                   (cons (bouncing-dvd-logo-x bouncing-dvd-logo)
                                         (bouncing-dvd-logo-y bouncing-dvd-logo))
                                   parent-frame-width
                                   parent-frame-height)
+
     ;; increment position
     (cl-incf (bouncing-dvd-logo-x bouncing-dvd-logo)
              (bouncing-dvd-logo-xspeed bouncing-dvd-logo))
     (cl-incf (bouncing-dvd-logo-y bouncing-dvd-logo)
              (bouncing-dvd-logo-yspeed bouncing-dvd-logo))
+
     ;; posframe should be on parent-frame (This is to deal parent-frame resizing)
     (when (>= (+ (bouncing-dvd-logo-x bouncing-dvd-logo) posframe-width)
               parent-frame-width)
@@ -101,6 +105,7 @@ For exeample:
               parent-frame-height)
       (setf (bouncing-dvd-logo-y bouncing-dvd-logo)
             (- parent-frame-height posframe-height)))
+
     ;; reflection
     (when (or (>= (+ (bouncing-dvd-logo-x bouncing-dvd-logo) posframe-width)
                   parent-frame-width)
@@ -155,9 +160,10 @@ moving."
                :y init-y
                :posframe
                (posframe-show bouncing-dvd-logo--buf-name
-                              :background-color (if bouncing-dvd-logo-random-color-p
-                                                    (bouncing-dvd-logo--make-random-color)
-                                                  bouncing-dvd-logo-fixed-color)
+                              :background-color 
+                              (if bouncing-dvd-logo-random-color-p
+                                  (bouncing-dvd-logo--make-random-color)
+                                bouncing-dvd-logo-fixed-color)
                               :position (cons init-x init-y))))
         (posframe-refresh bouncing-dvd-logo--buf-name)
         (setq bouncing-dvd-logo--update-timer
