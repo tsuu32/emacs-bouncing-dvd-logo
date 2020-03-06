@@ -17,7 +17,7 @@ Specify child frame background color (`bouncing-dvd-logo-random-color-p` must be
 (setq bouncing-dvd-logo-fixed-color "red")
 ```
 
-Customize inserted child frame contents:
+Customize inserting child frame contents:
 ```elisp
 ;; Set an S-exp to insert contents
 ;; To insert string
