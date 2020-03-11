@@ -160,7 +160,7 @@ moving."
                :y init-y
                :posframe
                (posframe-show bouncing-dvd-logo--buf-name
-                              :background-color 
+                              :background-color
                               (if bouncing-dvd-logo-random-color-p
                                   (bouncing-dvd-logo--make-random-color)
                                 bouncing-dvd-logo-fixed-color)
