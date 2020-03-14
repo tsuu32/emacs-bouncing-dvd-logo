@@ -56,7 +56,7 @@ For exeample:
   :type 'color)
 
 
-(defvar bouncing-dvd-logo--buf-name " *dvd*")
+(defvar bouncing-dvd-logo--buf-name " *bouncing-dvd-logo*")
 (defvar bouncing-dvd-logo--update-timer nil)
 
 (cl-defstruct bouncing-dvd-logo
