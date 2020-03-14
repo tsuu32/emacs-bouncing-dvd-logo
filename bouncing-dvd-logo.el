@@ -153,7 +153,11 @@ moving."
             (init-y (/ (frame-pixel-height (selected-frame)) 2)))
         (with-current-buffer (get-buffer-create bouncing-dvd-logo--buf-name)
           (erase-buffer)
-          (eval bouncing-dvd-logo-insert-form))
+          (condition-case err
+              (eval bouncing-dvd-logo-insert-form)
+            (error
+             (setq bouncing-dvd-logo-mode nil)
+             (error "%s" (error-message-string err)))))
         (setq bouncing-dvd-logo
               (make-bouncing-dvd-logo
                :x init-x
