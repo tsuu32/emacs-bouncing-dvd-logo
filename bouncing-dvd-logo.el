@@ -1,4 +1,4 @@
-;;; bouncing-dvd-logo.el --- Emacs Lisp port of Bouncing DVD Logo -*- lexical-binding: t p-*-
+;;; bouncing-dvd-logo.el --- Emacs Lisp port of Bouncing DVD Logo -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2020 by Masahiro Nakamura
 
