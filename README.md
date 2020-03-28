@@ -38,7 +38,12 @@ Bouncing child frame is one [posframe](https://github.com/tumashu/posframe) fram
 	      (when bouncing-dvd-logo-mode
 		(with-current-buffer (get-buffer bouncing-dvd-logo--buf-name)
 		  (erase-buffer)
-		  (dotimes (_ 3)
-		    (insert "¯\\_(ツ)_/¯\n"))
+		  (insert "  ___
+ / _ \\ _ __ __ _
+| | | | '__/ _` |
+| |_| | | | (_| |
+ \\___/|_|  \\__, |
+           |___/
+")
 		  (posframe-refresh bouncing-dvd-logo--buf-name)))))
 ```
