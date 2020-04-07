@@ -5,7 +5,7 @@
 ;; Author: Masahiro Nakamura <tsuucat@icloud.com>
 ;; Version: 0.0.1
 ;; URL: https://github.com/tsuu32/emacs-bouncing-dvd-logo
-;; Package-Requires: ((emacs "26.1") (posframe "20200304.631"))
+;; Package-Requires: ((emacs "26.1") (posframe "0.7.0"))
 ;; Keywords: convenience game
 
 ;; This program is free software; you can redistribute it and/or modify
