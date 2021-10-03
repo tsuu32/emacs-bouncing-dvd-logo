@@ -36,13 +36,13 @@
   :group 'game
   :prefix "bouncing-dvd-logo-")
 
-(defcustom bouncing-dvd-logo-insert-form '(insert "DVD\n(o)")
-  "S-exp to insert string or image to child frame.
-For exeample:
-  '(insert \"Hello!!!\nWhat's up?\")
-  '(insert-image (create-image \"~/foo.png\"))"
+(defcustom bouncing-dvd-logo-item "DVD\n(o)"
+  "Buffer contents displayed by the bouncing frame.
+If string set, the string is just inserted.
+If function set, the function is called."
   :group 'bouncing-dvd-logo
-  :type 'sexp)
+  :type '(choice (string :tag "Buffer string")
+                 (function :tag "Altenative functon to insert item")))
 
 (defcustom bouncing-dvd-logo-random-color-p t
   "If non-nil, child frame background color turns randomly."
@@ -148,16 +148,22 @@ moving."
   (when bouncing-dvd-logo--update-timer
     (cancel-timer bouncing-dvd-logo--update-timer))
   (setq bouncing-dvd-logo--update-timer nil)
-  (if bouncing-dvd-logo-mode
+  (cond
+   (bouncing-dvd-logo-mode
+    (with-current-buffer (get-buffer-create bouncing-dvd-logo--buf-name)
+      (erase-buffer)
+      (pcase bouncing-dvd-logo-item
+        ((pred stringp)
+         (insert bouncing-dvd-logo-item))
+        ((pred functionp)
+         (condition-case err
+             (funcall bouncing-dvd-logo-item)
+           (error
+            (setq bouncing-dvd-logo-mode nil)
+            (error "%s" (error-message-string err)))))
+        (_ (error "Option bouncing-dvd-logo-item must be string or function"))))
       (let ((init-x (/ (frame-pixel-width (selected-frame)) 2))
             (init-y (/ (frame-pixel-height (selected-frame)) 2)))
-        (with-current-buffer (get-buffer-create bouncing-dvd-logo--buf-name)
-          (erase-buffer)
-          (condition-case err
-              (eval bouncing-dvd-logo-insert-form)
-            (error
-             (setq bouncing-dvd-logo-mode nil)
-             (error "%s" (error-message-string err)))))
         (setq bouncing-dvd-logo
               (make-bouncing-dvd-logo
                :x init-x
@@ -171,9 +177,10 @@ moving."
                               :position (cons init-x init-y))))
         (posframe-refresh bouncing-dvd-logo--buf-name)
         (setq bouncing-dvd-logo--update-timer
-              (run-at-time t 0.01 #'bouncing-dvd-logo--update)))
+              (run-at-time t 0.01 #'bouncing-dvd-logo--update))))
+   (t
     (posframe-delete bouncing-dvd-logo--buf-name)
-    (setq bouncing-dvd-logo nil)))
+    (setq bouncing-dvd-logo nil))))
 
 (provide 'bouncing-dvd-logo)
 

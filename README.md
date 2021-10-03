@@ -18,20 +18,21 @@ To specify child frame background color (`bouncing-dvd-logo-random-color-p` must
 (setq bouncing-dvd-logo-fixed-color "red")
 ```
 
-To customize inserting child frame contents:
+To customize bouncing frame contents:
 ```elisp
-;; Set an S-exp to insert contents
-;; To insert string
-(setq bouncing-dvd-logo-insert-form '(insert "Hey"))
+;; To insert another string
+(setq bouncing-dvd-logo-item "Hey")
 
 ;; To insert image
-(setq bouncing-dvd-logo-insert-form '(insert-image (create-image "~/foo.png")))
+(setq bouncing-dvd-logo-item
+      (lambda ()
+        (insert-image (create-image "~/foo.png"))))
 ```
 
 Caveat: don't insert too large image.
 
 ## Advanced
-Bouncing child frame is one [posframe](https://github.com/tumashu/posframe) frame, so you can dynamically modify contents.
+Bouncing frame is one [posframe](https://github.com/tumashu/posframe) frame, so you can dynamically modify contents.
 ```elisp
 (add-hook 'org-mode-hook
 	  #'(lambda ()
