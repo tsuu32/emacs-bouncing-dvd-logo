@@ -1,9 +1,9 @@
-;;; bouncing-dvd-logo.el --- Emacs Lisp port of Bouncing DVD Logo -*- lexical-binding: t -*-
+;;; bouncing-dvd-logo.el --- Bouncing DVD Logo for Emacs -*- lexical-binding: t -*-
 
-;; Copyright (C) 2020 by Masahiro Nakamura
+;; Copyright (C) 2020-2021 by Masahiro Nakamura
 
 ;; Author: Masahiro Nakamura <tsuucat@icloud.com>
-;; Version: 0.0.1
+;; Version: 0.0.2
 ;; URL: https://github.com/tsuu32/emacs-bouncing-dvd-logo
 ;; Package-Requires: ((emacs "26.1") (posframe "0.7.0"))
 ;; Keywords: convenience game
@@ -23,7 +23,7 @@
 
 ;;; Commentary:
 
-;; Emacs Lisp port of Bouncing DVD Logo
+;; Bouncing DVD Logo for Emacs
 ;; Try M-x bouncing-dvd-logo-mode
 
 ;;; Code:
@@ -32,7 +32,7 @@
 (require 'posframe)
 
 (defgroup bouncing-dvd-logo nil
-  "Display Bouncing DVD Logo as a child frame"
+  "Display Bouncing DVD Logo"
   :group 'game
   :prefix "bouncing-dvd-logo-")
 

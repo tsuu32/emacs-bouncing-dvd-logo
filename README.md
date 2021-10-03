@@ -1,5 +1,5 @@
 # bouncing-dvd-logo.el
-bouncing-dvd-logo.el is a Emacs Lisp port of Bouncing DVD Logo.
+bouncing-dvd-logo.el is a Bouncing DVD Logo for Emacs.
 
 ## Screenshot
 ![bouncing-dvd-logo-mode.gif](bouncing-dvd-logo-mode.gif)
