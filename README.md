@@ -8,14 +8,14 @@ bouncing-dvd-logo.el is a Emacs Lisp port of Bouncing DVD Logo.
 Call command `M-x bouncing-dvd-logo-mode`.
 
 ## Customize
-To prevent turning child frame background color:
+To turn bouncing frame's background color randomly (default):
 ```elisp
-(setq bouncing-dvd-logo-random-color-p nil)
+(setq bouncing-dvd-logo-background-color 'randomize)
 ```
 
-To specify child frame background color (`bouncing-dvd-logo-random-color-p` must be nil):
+To specify bouncing frame's background color:
 ```elisp
-(setq bouncing-dvd-logo-fixed-color "red")
+(setq bouncing-dvd-logo-background-color "gold")
 ```
 
 To customize bouncing frame contents:

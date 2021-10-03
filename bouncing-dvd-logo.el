@@ -44,16 +44,13 @@ If function set, the function is called."
   :type '(choice (string :tag "Buffer string")
                  (function :tag "Altenative functon to insert item")))
 
-(defcustom bouncing-dvd-logo-random-color-p t
-  "If non-nil, child frame background color turns randomly."
+(defcustom bouncing-dvd-logo-background-color 'randomize
+  "Bouncing frame's background color.
+If symbol randomize set, background color turns randomly.
+If string set, the string is set as frame's background."
   :group 'bouncing-dvd-logo
-  :type 'boolean)
-
-(defcustom bouncing-dvd-logo-fixed-color "gold"
-  "Child frame background color.
-`bouncing-dvd-logo-random-color-p' must be nil."
-  :group 'bouncing-dvd-logo
-  :type 'color)
+  :type '(choice (const :tag "Turn randomly" randomize)
+                 (string :tag "Color string")))
 
 
 (defvar bouncing-dvd-logo--buf-name " *bouncing-dvd-logo*")
@@ -112,7 +109,7 @@ If function set, the function is called."
               (<= (bouncing-dvd-logo-x bouncing-dvd-logo) 0))
       (setf (bouncing-dvd-logo-xspeed bouncing-dvd-logo)
             (- (bouncing-dvd-logo-xspeed bouncing-dvd-logo)))
-      (when bouncing-dvd-logo-random-color-p
+      (when (eq bouncing-dvd-logo-background-color 'randomize)
         (set-frame-parameter posframe
                              'background-color
                              (bouncing-dvd-logo--make-random-color))))
@@ -121,7 +118,7 @@ If function set, the function is called."
               (<= (bouncing-dvd-logo-y bouncing-dvd-logo) 0))
       (setf (bouncing-dvd-logo-yspeed bouncing-dvd-logo)
             (- (bouncing-dvd-logo-yspeed bouncing-dvd-logo)))
-      (when bouncing-dvd-logo-random-color-p
+      (when (eq bouncing-dvd-logo-background-color 'randomize)
         (set-frame-parameter posframe
                              'background-color
                              (bouncing-dvd-logo--make-random-color))))))
@@ -171,9 +168,9 @@ moving."
                :posframe
                (posframe-show bouncing-dvd-logo--buf-name
                               :background-color
-                              (if bouncing-dvd-logo-random-color-p
+                              (if (eq bouncing-dvd-logo-background-color 'randomize)
                                   (bouncing-dvd-logo--make-random-color)
-                                bouncing-dvd-logo-fixed-color)
+                                bouncing-dvd-logo-background-color)
                               :position (cons init-x init-y))))
         (posframe-refresh bouncing-dvd-logo--buf-name)
         (setq bouncing-dvd-logo--update-timer
